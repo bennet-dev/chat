@@ -1,6 +1,6 @@
 import { Title } from "solid-start";
-import Counter from "~/components/Counter";
-import ChatInterface from "~/components/chat-interface";
+import Counter from "~/features/Counter";
+import ChatInterface from "~/features/chat-interface";
 
 export default function Home() {
   return (
