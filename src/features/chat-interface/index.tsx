@@ -17,7 +17,7 @@ const ChatInterface = () => {
 
     return (
         <div class="flex flex-col h-screen p-6">
-            <h1 class="text-6xl font-bold mb-4 ">AI Chat</h1>
+            <h1 class="text-3xl font-bold mb-4 ">AI Chat</h1>
             <div class="flex-grow overflow-auto mb-4 bg-white p-4 rounded-3xl shadow-lg bg-opacity-10 backdrop-blur-md border border-blue-300 border-opacity-60">
                 <For each={messages()} >
                     {({ id, message, isHuman }) => (
