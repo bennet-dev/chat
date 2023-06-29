@@ -1,30 +1,25 @@
-# SolidStart
+# AI Chat App
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+This document provides a guide on how to set up and run the AI Chat App.
 
-## Creating a project
+## Initial Setup
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+### Create .env file
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
+Firstly, you will need to create a `.env` file. This file should be created in the root directory of the project. It should resemble the structure and contents of the `.env.example` file which is also located in the root directory.
 
-## Developing
+## Installation
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To install the necessary dependencies for the project, you should run the following command:
+`npm install`
 
-```bash
-npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Running the Application
 
-## Building
+Once your configurations are set and the dependencies have been installed, you can start the application with the following command:
 
-Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
+`npm run dev`
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
+The application will start and you can begin interacting with it.
+
+Happy Coding!
