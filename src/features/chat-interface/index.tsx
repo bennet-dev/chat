@@ -30,7 +30,7 @@ const ChatInterface = () => {
                 </For>
             </div>
             <div class="sticky bottom-0 flex mt-4 p-6 ">
-                <input type="text" class="flex-grow mr-2 py-2 px-4 rounded-lg border border-blue-500 bg-white bg-opacity-10  placeholder-white placeholder-opacity-40" placeholder="Type your message here" value={message()} onInput={(e) => setMessage(e.currentTarget.value)} disabled={loading()} />
+                <input onKeyDown={(e) => e.key === "Enter" && handleMessage()} type="text" class="flex-grow mr-2 py-2 px-4 rounded-lg border border-blue-500 bg-white bg-opacity-10  placeholder-white placeholder-opacity-40" placeholder="Type your message here" value={message()} onInput={(e) => setMessage(e.currentTarget.value)} disabled={loading()} />
                 <button class="py-2 px-4 bg-white text-blue-500 rounded-lg shadow-md bg-opacity-10 t border border-blue-300" onClick={handleMessage} disabled={loading()}>
                     {loading() ? "Loading..." : "Send"}
                 </button>
