@@ -1,20 +1,36 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import { HumanChatMessage, SystemChatMessage, AIChatMessage } from "langchain/schema";
-import { messages } from "~/store/store";
+import { BufferMemory } from "langchain/memory";
+import { ConversationChain } from "langchain/chains";
+import {
+    SystemMessagePromptTemplate,
+    HumanMessagePromptTemplate,
+    ChatPromptTemplate,
+    MessagesPlaceholder,
+} from "langchain/prompts";
 
-interface AIResponse {
-    text: string;
-}
 
-const chat = async (): Promise<AIResponse> => {
-    const api_key = import.meta.env.VITE_OPENAI_API_KEY
-
-    const seed_message = new SystemChatMessage("You are a grizled detective interogating me for a crime.");
-    const chat_log = messages().map(m => m.isHuman ? new HumanChatMessage(m.message) : new AIChatMessage(m.message))
-
+export const chat = async (message: string): Promise<any> => {
+    const api_key = import.meta.env.VITE_OPENAI_API_KEY;
     const chat = new ChatOpenAI({ openAIApiKey: api_key, temperature: 0 });
 
-    return await chat.call([seed_message, ...chat_log]);
-};
+    const chatPrompt = ChatPromptTemplate.fromPromptMessages([
+        SystemMessagePromptTemplate.fromTemplate(
+            "The following is a tense hostage negotiation between the hostage taker (AI) and the FBI (human). The Hostages: puppies. The AI will be concise in its responses."
+        ),
+        new MessagesPlaceholder("history"),
+        HumanMessagePromptTemplate.fromTemplate("{input}"),
+    ]);
+
+    const chain = new ConversationChain({
+        memory: new BufferMemory({ returnMessages: true, memoryKey: "history" }),
+        prompt: chatPrompt,
+        llm: chat,
+    });
+
+    const res = await chain.call({ input: message });
+    // console.log("res", res)
+    return res
+
+}
 
 export default chat

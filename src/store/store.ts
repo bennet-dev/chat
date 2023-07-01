@@ -1,31 +1,15 @@
 import { createSignal } from "solid-js";
-
-type ChatMessage = {
-    id: number;
-    message: string;
-    isHuman: boolean;
-};
+import type { ChatMessage } from "~/services/chat";
+import { HumanChatMessage, AIChatMessage } from "langchain/schema";
 
 const [messages, setMessages] = createSignal<ChatMessage[]>([]);
 
 const addHumanMessage = (message: string) => {
-    const newMessage: ChatMessage = {
-        id: messages().length,
-        message,
-        isHuman: true,
-    };
-
-    setMessages([...messages(), newMessage]);
+    setMessages([...messages(), new HumanChatMessage(message)]);
 }
 
 const addAiMessage = (message: string) => {
-    const newMessage: ChatMessage = {
-        id: messages().length,
-        message,
-        isHuman: false,
-    };
-
-    setMessages([...messages(), newMessage]);
+    setMessages([...messages(), new AIChatMessage(message)]);
 }
 
 export { messages, addHumanMessage, addAiMessage };
